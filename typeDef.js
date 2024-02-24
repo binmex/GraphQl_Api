@@ -38,7 +38,8 @@ const typeDefs = gql`
     ): Reservation
 
     deleteClient(id: ID!): Client
-
+    deleteReservation(id: ID!): Reservation
+    
     updateClient(id: ID!, name: String, celphone: String, email: String): Client
   }
 `;

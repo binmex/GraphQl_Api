@@ -83,6 +83,20 @@ const resolvers = {
             } catch (error) {
                 throw new Error("Error al crear la reserva: " + error.message);
             }
+        },
+
+        deleteReservation: async (_, args) => {
+            try {
+                const { id } = args;
+                const reservation = await Reservation.findOne({ id: id });
+                if (!reservation) {
+                    throw new Error('Reserva no encontrada');
+                }
+                await Reservation.deleteOne({ _id: reservation._id });
+                return reservation;
+            } catch (error) {
+                throw new Error('Error al eliminar la reserva: ' + error.message);
+            }
         }
         
     }
