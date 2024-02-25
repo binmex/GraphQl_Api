@@ -1,7 +1,6 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
-
   type Client {
     id: ID!
     name: String!
@@ -24,9 +23,14 @@ const typeDefs = gql`
     getAllClient: [Client]
     getClientByID(id: ID!): Client
   }
-  
+
   type Mutation {
-    createClient(id: ID!, name: String!, celphone: String, email: String): Client
+    createClient(
+      id: ID!
+      name: String!
+      celphone: String
+      email: String
+    ): Client
 
     createReservation(
       id: ID!
