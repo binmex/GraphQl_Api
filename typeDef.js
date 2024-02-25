@@ -6,6 +6,7 @@ const typeDefs = gql`
     name: String!
     celphone: String
     email: String
+    reservations: [Reservation]
   }
 
   type Reservation {
@@ -14,7 +15,6 @@ const typeDefs = gql`
     bookingEndDate: String!
     service: String!
     comments: String
-    client: Client
   }
 
   type Query {
