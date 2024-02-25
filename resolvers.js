@@ -99,6 +99,48 @@ const resolvers = {
         throw new Error("Error al crear la reserva: " + error.message);
       }
     },
+    deleteReservation: async (_, args) => {
+      try {
+        const { id } = args;
+        const reservation = await Reservation.findOne({ id: id });
+        if (!reservation) {
+          throw new Error("Reserva no encontrada");
+        }
+        await Reservation.deleteOne({ _id: reservation._id });
+        return reservation;
+      } catch (error) {
+        throw new Error("Error al eliminar la reserva: " + error.message);
+      }
+    },
+    updateReservation: async (_, args) => {
+      try {
+        const { id, bookingStartDate, bookingEndDate, service, comments } =
+          args;
+        // Buscar la reserva por su ID
+        const reservation = await Reservation.findOne({ id: id });
+        if (!reservation) {
+          throw new Error("Reserva no encontrada");
+        }
+        // Actualizar los campos proporcionados
+        if (bookingStartDate !== undefined) {
+          reservation.bookingStartDate = bookingStartDate;
+        }
+        if (bookingEndDate !== undefined) {
+          reservation.bookingEndDate = bookingEndDate;
+        }
+        if (service !== undefined) {
+          reservation.service = service;
+        }
+        if (comments !== undefined) {
+          reservation.comments = comments;
+        }
+        // Guardar los cambios
+        await reservation.save();
+        return reservation;
+      } catch (error) {
+        throw new Error("Error al actualizar la reserva: " + error.message);
+      }
+    },
   },
 };
 
