@@ -15,7 +15,6 @@ const typeDefs = gql`
     bookingEndDate: String!
     service: String!
     comments: String
-    client: Client
   }
 
   type Query {
@@ -43,7 +42,18 @@ const typeDefs = gql`
 
     deleteClient(id: ID!): Client
 
+    deleteReservation(id: ID!): Reservation
+
     updateClient(id: ID!, name: String, celphone: String, email: String): Client
+
+    updateReservation(
+      id: ID!
+      bookingStartDate: String!
+      bookingEndDate: String!
+      service: String!
+      comments: String
+      idClient: ID!
+    ): Reservation
   }
 `;
 
