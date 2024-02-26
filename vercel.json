@@ -1,12 +1,14 @@
 {
-    "functions": {
-      "api": {
-        "handler": "index.handler"
+    "builds": [
+      {
+        "src": "./index.js",
+        "use": "@vercel/node"
       }
-    },
+    ],
     "routes": [
-      { "src": "/api(/.*)?", "dest": "api" },
-      { "src": "/(.*)", "dest": "/" }
+      {
+        "src": "/(.*)",
+        "dest": "/"
+      }
     ]
   }
-  
