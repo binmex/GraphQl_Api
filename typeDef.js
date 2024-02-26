@@ -21,6 +21,8 @@ const typeDefs = gql`
     hello: String
     getAllClient: [Client]
     getClientByID(id: ID!): Client
+    getAllReservations: [Reservation]
+    getReservationById(id: ID!): Reservation
   }
 
   type Mutation {

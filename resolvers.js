@@ -1,6 +1,6 @@
 const Client = require("./models/model-client");
 const Reservation = require("./models/model-reservation");
-
+const { format } = require('date-fns');
 const resolvers = {
   Query: {
     getAllClient: async () => {
@@ -16,6 +16,37 @@ const resolvers = {
         return client;
       } catch (error) {
         throw new Error("Error al obtener el cliente: " + error.message);
+      }
+    },
+    getAllReservations: async () => {
+      try {
+        const reservations = await Reservation.find({});
+        const formattedReservations = reservations.map(reservation => ({
+          id: reservation.id,
+          bookingStartDate: format(new Date(reservation.bookingStartDate), 'yyyy-MM-dd'),
+          bookingEndDate: format(new Date(reservation.bookingEndDate), 'yyyy-MM-dd'),
+          service: reservation.service,
+          comments: reservation.comments,
+        }));
+        return formattedReservations;
+      } catch (error) {
+        throw new Error("Error al obtener todas las reservas: " + error.message);
+      }
+    },
+    getReservationById: async (_, args) => {
+      try {
+        const id = args.id;
+        const reservation = await Reservation.findOne({ id: id });
+        const formattedReservation = {
+          id: reservation.id,
+          bookingStartDate: format(new Date(reservation.bookingStartDate), 'yyyy-MM-dd'),
+          bookingEndDate: format(new Date(reservation.bookingEndDate), 'yyyy-MM-dd'),
+          service: reservation.service,
+          comments: reservation.comments,
+        };
+        return formattedReservation;
+      } catch (error) {
+        throw new Error("Error al obtener la reserva: " + error.message);
       }
     },
   },
