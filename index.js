@@ -23,9 +23,9 @@ async function start() {
 
   app.set("PORT", process.env.PORT || 3000);
 
-  app.use("/", (req, res) =>
-    res.send("Back del proyecto de creación y consumo de APIs")
-  );
+  // app.use("/", (req, res) =>
+  //   res.send("Back del proyecto de creación y consumo de APIs")
+  // );
 
   const port = app.get("PORT");
   app.listen(port, () => console.log(`Server listening on port ${port}`));
