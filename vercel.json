@@ -4,12 +4,13 @@
         "src": "./index.js",
         "use": "@vercel/node",
         "config": {
-            "includeFiles": ["models/**/*.js", "resolvers.js", "typeDef.js", "drivers/**/*.js"]
+          "includeFiles": ["models/**/*.js", "resolvers.js", "typeDef.js", "drivers/**/*.js"]
         }
       }
     ],
     "routes": [
-        { "src": "/api/graphql", "dest": "api" }, 
-        { "src": "/(.*)", "dest": "/" }
+      { "src": "/api/graphql", "dest": "api/graphql" },
+      { "src": "/(.*)", "dest": "/" }
     ]
   }
+  

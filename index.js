@@ -19,7 +19,7 @@ async function start() {
 
   await apolloServer.start();
 
-  apolloServer.applyMiddleware({ app });
+  apolloServer.applyMiddleware({ app, path: "/api/graphql" });
 
   app.set("PORT", process.env.PORT || 3000);
 
