@@ -15,16 +15,17 @@ async function start() {
   const apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
+    introspection: true,
   });
 
   await apolloServer.start();
 
-  apolloServer.applyMiddleware({app});
+  apolloServer.applyMiddleware({ app });
 
   app.set("PORT", process.env.PORT || 3000);
 
   app.use("/", (req, res) =>
-    res.json({response:"Back del proyecto de creación y consumo de APIs"})
+    res.json({ response: "Back del proyecto de creación y consumo de APIs" })
   );
 
   const port = app.get("PORT");
